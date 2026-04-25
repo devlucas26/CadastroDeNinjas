@@ -17,7 +17,7 @@ public class MissoesModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String nomeDaMissao;
     private String dificuldade;
 
@@ -25,27 +25,4 @@ public class MissoesModel {
     @OneToMany(mappedBy = "missoes")
     private List<NinjaModel> ninjas;
 
-    public MissoesModel(){
-
-    }
-    public MissoesModel(long id, String nomeDaMissao, String dificuldade) {
-        this.id = id;
-        this.nomeDaMissao = nomeDaMissao;
-        this.dificuldade = dificuldade;
-    }
-    public String getNomeDaMissao() {
-        return nomeDaMissao;
-    }
-
-    public void setNomeDaMissao(String nomeDaMissao) {
-        this.nomeDaMissao = nomeDaMissao;
-    }
-
-    public String getDificuldade() {
-        return dificuldade;
-    }
-
-    public void setDificuldade(String dificuldade) {
-        this.dificuldade = dificuldade;
-    }
 }
