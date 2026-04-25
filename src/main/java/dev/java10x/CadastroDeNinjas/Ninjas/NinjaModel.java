@@ -15,13 +15,20 @@ public class NinjaModel {
 // faltou o modificador private nos atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Column(name = "id")
     private long id;
+
+    @Column(name = "nome")
     private String nome;
 
     // colocar email como unico
-    @Column(unique = true)
+    @Column(unique = true, name = "email")
     private String email;
     private int idade;
+
+    @Column(name = "img_url")
+    private String imgUrl;
 
     // varios ninjas podem fazer a mesma missao
     @ManyToOne
