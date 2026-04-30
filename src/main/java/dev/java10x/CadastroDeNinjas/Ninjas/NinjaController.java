@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping
 public class NinjaController {
 
-    @GetMapping("/controllerNinja")
+    @GetMapping("/boasvindas")
     public String mensagem(){
         return "endpoint do NinjaController";
     }
