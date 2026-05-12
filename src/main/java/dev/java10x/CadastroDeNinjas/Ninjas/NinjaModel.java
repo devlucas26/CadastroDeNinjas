@@ -28,9 +28,11 @@ public class NinjaModel {
     @Column(name = "img_url")
     private String imgUrl;
 
+    // não há problemas em mexer no model se está se trabalhando com DTO's
+    private String ninja_rank;
+
     // varios ninjas podem fazer a mesma missao
     @ManyToOne
     @JoinColumn(name = "missoes_id")
     private MissoesModel missoes;
-
 }
