@@ -14,8 +14,8 @@ public class NinjaController {
         this.ninjaService = ninjaService;
     }
     @GetMapping("/listar")
-    public List<NinjaModel> listar() {
-        return ninjaService.listar();
+    public List<NinjaDTO> listar() {
+        return ninjaService.listarDTO();
     }
     @GetMapping("/listar/{id}")
     public NinjaModel procuraPorId(@PathVariable Long id) {
