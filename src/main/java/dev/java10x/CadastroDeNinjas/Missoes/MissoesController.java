@@ -14,29 +14,25 @@ public class MissoesController {
         this.missoesService = missoesService;
     }
     @GetMapping("/listar")
-    public List<MissoesModel> listarTodos() {
-        return missoesService.listar();
+    public List<MissoesDTO> listarTodos() {
+        return missoesService.listarDTO();
     }
-    @PostMapping("/criar")
-    public String cadastrar(){
-        return "cadastro realizado com sucesso";
+
+    @PutMapping("/atualiza/{id}")
+    public MissoesDTO atualizar(@PathVariable Long id, @RequestBody MissoesDTO missoesDTO){
+        return missoesService.atualizaDTO(id,missoesDTO);
     }
-    @PutMapping("/atualizar/id")
-    public String atualizar(){
-        return "atualização realizada com sucesso";
-    }
-    @DeleteMapping("/deletar/id")
-    public String deletar(){
-        return "deletado com sucesso";
-    }
+
     @GetMapping("/listar/{id}")
-    public MissoesModel listarId(@PathVariable Long id){
-        return missoesService.listarPorId(id);
+    public MissoesDTO listarId(@PathVariable Long id){
+        return missoesService.listarPorIdDTO(id);
     }
+
     @PostMapping("/cadastrar")
     public MissoesModel cadastarMissao(@RequestBody MissoesModel missoesModel){
         return missoesService.cadastraMissao(missoesModel);
     }
+
     @DeleteMapping("/deletar/{id}")
     public void deletarMissao(@PathVariable Long id){
         missoesService.deletarMissao(id);

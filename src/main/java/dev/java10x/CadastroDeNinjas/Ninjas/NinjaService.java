@@ -15,10 +15,6 @@ public class NinjaService {
         this.ninjaMapper = ninjaMapper;
     }
 
-    public List<NinjaModel> listar(){
-        return ninjaRepository.findAll();
-    }
-
     public List<NinjaDTO> listarDTO(){
 
         List<NinjaModel> ninjas = ninjaRepository.findAll();
@@ -27,14 +23,14 @@ public class NinjaService {
                 .toList();
     }
 
-    public NinjaModel listarPorId(Long id){
-        return ninjaRepository.findById(id).orElse(null);
+    public NinjaDTO listarPorId(Long id){
+
+        return ninjaRepository.findById(id)
+                .map(ninjaMapper::map)
+                .orElse(null);
     }
 
     //TODO entender com isso funciona e replicar para as missões
-    public NinjaModel cadastra(NinjaModel ninjaModel){
-        return ninjaRepository.save(ninjaModel);
-    }
     // cadastrar usando DTO
     public NinjaDTO cadastroDTO(NinjaDTO ninjaDTO){
 
@@ -43,15 +39,17 @@ public class NinjaService {
         return ninjaMapper.map(ninjaModel);
     }
 
-    // DELETAR
+    // DELETAR é o único método que não precisa de DTO, menos uma preocupação
     public void deleta(Long id){
         ninjaRepository.deleteById(id);
     }
     // UPDATE
-    public NinjaModel atualiza(Long id, NinjaModel ninjaModelAtualizado){
+    public NinjaDTO atualiza(Long id, NinjaDTO ninjaAtualizado){
         if (ninjaRepository.existsById(id)){
-            ninjaModelAtualizado.setId(id);
-            return ninjaRepository.save(ninjaModelAtualizado);
+            ninjaAtualizado.setId(id);
+            NinjaModel ninjaModel = ninjaMapper.map(ninjaAtualizado);
+            ninjaModel = ninjaRepository.save(ninjaModel);
+            return ninjaMapper.map(ninjaModel);
         }
         return null;
     }

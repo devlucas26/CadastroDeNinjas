@@ -13,25 +13,30 @@ public class NinjaController {
     public NinjaController(NinjaService ninjaService) {
         this.ninjaService = ninjaService;
     }
+
     @GetMapping("/listar")
     public List<NinjaDTO> listar() {
         return ninjaService.listarDTO();
     }
+
     @GetMapping("/listar/{id}")
-    public NinjaModel procuraPorId(@PathVariable Long id) {
+    public NinjaDTO procuraPorId(@PathVariable Long id) {
         return ninjaService.listarPorId(id);
     }
+
     @PostMapping("/criar")
-    public NinjaModel cadastraNinja(@RequestBody NinjaModel ninjaModel){
-        return ninjaService.cadastra(ninjaModel);
+    public NinjaDTO cadastraNinja(@RequestBody NinjaDTO ninjaDTO){
+        return ninjaService.cadastroDTO(ninjaDTO);
     }
+
     @DeleteMapping("/deletar/{id}")
     public void deletar(@PathVariable Long id){
         ninjaService.deleta(id);
     }
+
     @PutMapping("/atualiza/{id}")
-    public NinjaModel atualizar(@PathVariable Long id, @RequestBody NinjaModel ninjaModelAtualizado){
-        return ninjaService.atualiza(id, ninjaModelAtualizado);
+    public NinjaDTO atualizar(@PathVariable Long id, @RequestBody NinjaDTO ninjaAtualizado){
+        return ninjaService.atualiza(id, ninjaAtualizado);
         //ninjaService.atualiza(id, ninjaModelAtualizado);
     }
 }

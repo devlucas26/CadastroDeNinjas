@@ -1,5 +1,6 @@
 package dev.java10x.CadastroDeNinjas.Ninjas;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.java10x.CadastroDeNinjas.Missoes.MissoesModel;
 import jakarta.persistence.*;
 import lombok.*;
@@ -34,5 +35,6 @@ public class NinjaModel {
     // varios ninjas podem fazer a mesma missao
     @ManyToOne
     @JoinColumn(name = "missoes_id")
+    @JsonIgnore
     private MissoesModel missoes;
 }
