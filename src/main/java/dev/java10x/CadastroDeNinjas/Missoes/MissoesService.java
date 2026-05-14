@@ -1,5 +1,6 @@
 package dev.java10x.CadastroDeNinjas.Missoes;
 
+import dev.java10x.CadastroDeNinjas.Ninjas.NinjaModel;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,20 +9,55 @@ import java.util.List;
 public class MissoesService {
 
     private MissoesRepository missoesRepository;
+    private MissoesMapper missoesMapper;
 
-    public MissoesService(MissoesRepository missoesRepository) {
+    public MissoesService(MissoesRepository missoesRepository, MissoesMapper missoesMapper) {
         this.missoesRepository = missoesRepository;
+        this.missoesMapper = missoesMapper;
     }
-    public List<MissoesModel> listar(){
-        return missoesRepository.findAll();
+
+    // LISTA TODOS DOS DADOS
+    public List<MissoesDTO> listarDTO(){
+
+        List<MissoesModel> missoes = missoesRepository.findAll();
+        return missoes.stream()
+                .map(missoesMapper::map)
+                .toList();
     }
-    public MissoesModel listarPorId(Long id){
-        return missoesRepository.findById(id).orElse(null);
+
+    // LISTAR POR ID
+    public MissoesDTO listarPorIdDTO(Long id){
+
+        return missoesRepository.findById(id)
+                .map(missoesMapper::map)
+                .orElse(null);
     }
+
     public MissoesModel cadastraMissao(MissoesModel missoesModel){
         return missoesRepository.save(missoesModel);
     }
+    // DELETE
+    // permanece da mesma forma, não há necessidade de alterar o DELETE
     public void deletarMissao(Long id){
         missoesRepository.deleteById(id);
+    }
+    // CADASTRO
+    public MissoesDTO cadastra(MissoesDTO missoesDTO){
+
+        MissoesModel missoesModel = missoesMapper.map(missoesDTO);
+        missoesModel = missoesRepository.save(missoesModel);
+        return missoesMapper.map(missoesModel);
+    }
+    // FALTANDO O ATUALIZAR, QUE SEMPRE É O MAIS CHATO
+    public MissoesDTO atualizaDTO(Long id, MissoesDTO missoesDTO){
+
+        if (missoesRepository.existsById(id)){
+            missoesDTO.setId(id);
+            MissoesModel missoesModel = missoesMapper.map(missoesDTO);
+            missoesModel = missoesRepository.save(missoesModel);
+
+            return missoesMapper.map(missoesModel);
+        }
+        return null;
     }
 }
