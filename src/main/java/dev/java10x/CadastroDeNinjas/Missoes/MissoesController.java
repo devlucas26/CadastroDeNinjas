@@ -20,28 +20,8 @@ public class MissoesController {
         return missoesService.listarDTO();
     }
 
-    @PutMapping("/atualiza/{id}")
-    public MissoesDTO atualizar(@PathVariable Long id, @RequestBody MissoesDTO missoesDTO){
-        return missoesService.atualizaDTO(id,missoesDTO);
-    }
-
-    @GetMapping("/listar/{id}")
-    public MissoesDTO listarId(@PathVariable Long id){
-        return missoesService.listarPorIdDTO(id);
-    }
-
-    @PostMapping("/cadastrar")
-    public MissoesModel cadastarMissao(@RequestBody MissoesModel missoesModel){
-        return missoesService.cadastraMissao(missoesModel);
-    }
-
-    @DeleteMapping("/deletar/{id}")
-    public void deletarMissao(@PathVariable Long id){
-        missoesService.deletarMissao(id);
-    }
-
     // falta criar/refatorar metodos usados ResponseEntity para configurar respostas do servidor
-    @DeleteMapping("/deleteresponse/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deletaResponse(@PathVariable Long id){
         if(missoesService.listarPorIdDTO(id) != null){
             missoesService.deletarMissao(id);
@@ -51,14 +31,14 @@ public class MissoesController {
                 .body("Missão de id: " + id+ " não encontrada no banco");
     }
 
-    @PostMapping("/criaresponse")
+    @PostMapping("/criar")
     public ResponseEntity<String> criaResponse(@RequestBody MissoesDTO missoesDTO){
         missoesService.cadastra(missoesDTO);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("missao: " +missoesDTO.getNomeDaMissao()+ " criada");
     }
 
-    @PutMapping("atualizaresponse/{id}")
+    @PutMapping("atualizar/{id}")
     public ResponseEntity<String> atualizaResponse(@PathVariable Long id, @RequestBody MissoesDTO missoesDTO){
         if (missoesService.listarPorIdDTO(id) != null){
             missoesDTO.setId(id);
@@ -77,7 +57,7 @@ public class MissoesController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(id + " não encontrado");
     }*/
-    @GetMapping("listaridresponse/{id}")
+    @GetMapping("listarid/{id}")
     public ResponseEntity<Object> missoesIdResponse(@PathVariable Long id){
         MissoesDTO missoesDTO = missoesService.listarPorIdDTO(id);
 
