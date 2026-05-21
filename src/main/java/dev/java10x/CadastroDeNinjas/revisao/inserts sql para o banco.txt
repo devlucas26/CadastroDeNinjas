@@ -1,4 +1,0 @@
-INSERT INTO TB_CADASTRO_DE_NINJAS (nome, email, idade, img_url, missoes_id)
-VALUES ('Naruto Uzumaki', 'naruto@gmail.com',17,'https://exemplo.com/naruto.jpg',1);
-
-INSERT INTO
