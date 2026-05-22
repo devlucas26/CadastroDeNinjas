@@ -8,8 +8,8 @@ import java.util.List;
 @Service
 public class MissoesService {
 
-    private MissoesRepository missoesRepository;
-    private MissoesMapper missoesMapper;
+    private final MissoesRepository missoesRepository;
+    private final MissoesMapper missoesMapper;
 
     public MissoesService(MissoesRepository missoesRepository, MissoesMapper missoesMapper) {
         this.missoesRepository = missoesRepository;
@@ -33,10 +33,6 @@ public class MissoesService {
                 .orElse(null);
     }
 
-    public MissoesModel cadastraMissao(MissoesModel missoesModel){
-        return missoesRepository.save(missoesModel);
-    }
-    // DELETE
     // permanece da mesma forma, não há necessidade de alterar o DELETE
     public void deletarMissao(Long id){
         missoesRepository.deleteById(id);

@@ -10,14 +10,16 @@ import java.util.List;
 @RestController
 public class MissoesController {
 
-    private MissoesService missoesService;
+    private final MissoesService missoesService;
 
     public MissoesController(MissoesService missoesService){
         this.missoesService = missoesService;
     }
     @GetMapping("/listar")
-    public List<MissoesDTO> listarTodos() {
-        return missoesService.listarDTO();
+    public ResponseEntity<List<MissoesDTO>> listarTodos() {
+        List<MissoesDTO> missoes= missoesService.listarDTO();
+
+        return ResponseEntity.ok(missoes);
     }
 
     // falta criar/refatorar metodos usados ResponseEntity para configurar respostas do servidor
@@ -48,23 +50,15 @@ public class MissoesController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body("missão não encontrada no banco");
     }
-    /*@GetMapping("/listaidresponse/{id}")
-    public ResponseEntity<String> listarIdResponse(@PathVariable Long id){
-        if(missoesService.listarPorIdDTO(id) != null){
-            missoesService.listarPorIdDTO(id);
-           return ResponseEntity.ok(id + " listado com sucesso");
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(id + " não encontrado");
-    }*/
-    @GetMapping("listarid/{id}")
+
+    @GetMapping("listar/{id}")
     public ResponseEntity<Object> missoesIdResponse(@PathVariable Long id){
         MissoesDTO missoesDTO = missoesService.listarPorIdDTO(id);
 
-        if (missoesService.listarPorIdDTO(id) != null){
+        if (missoesDTO != null){
             return ResponseEntity.ok(missoesDTO);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body("não encontrado");
+                .body("missão não encontrada, favor verificar a busca");
     }
 }
