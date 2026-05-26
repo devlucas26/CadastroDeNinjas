@@ -10,6 +10,7 @@ import lombok.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class NinjaModel {
 // faltou o modificador private nos atributos
     @Id
