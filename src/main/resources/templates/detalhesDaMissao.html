@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes da missão</title>
+</head>
+<body>
+    <h1>Missão</h1>
+    <div>
+        <a th:text="${missao.nomeDaMissao}"></a><br>
+        <a th:text="${missao.dificuldade}"></a>
+    </div>
+    <a th:href="@{/missoes/ui/listar}">voltar para missoes</a>
+
+</body>
+</html>

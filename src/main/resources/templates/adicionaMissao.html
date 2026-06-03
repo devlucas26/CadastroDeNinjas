@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cadastro de nova missao</title>
+</head>
+<body>
+    <div>
+        <h1>formulario de nova missao</h1>
+
+        <form th:action="@{/missoes/ui/salvar}" th:object="${missao}" method="post">
+            <div>
+                <label for="nomeDaMissao">nome da missao:</label>
+                <input type="text" id="nomeDaMissao" th:field="*{nomeDaMissao}" required>
+
+                <label for="dificuldade">nivel de dificuldade:</label>
+                <input type="text" id="dificuldade" th:field="*{dificuldade}" required>
+            </div>
+            <div>
+                <button type="submit">salvar missao</button>
+                <a th:href="@{/missoes/ui/listar}">voltar para missoes</a>
+            </div>
+
+        </form>
+    </div>
+
+</body>
+</html>

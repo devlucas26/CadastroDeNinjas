@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todas as missoes cadastradas</title>
+</head>
+<body>
+<h1>Missoes cadastradas</h1>
+
+<h3><a th:href="@{/missoes/ui/cadastra}">cadastrar missao</a></h3>
+
+  <table border="1">
+    <thead>
+      <tr>
+        <th>ID missao</th>
+        <th>Nome da Missão</th>
+        <th>Dificuldade</th>
+
+        <th>Menu de Opções</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr th:each="missao : ${missoes}">
+        <td th:text="${missao.id}"></td>
+        <td th:text="${missao.nomeDaMissao}"></td>
+        <td th:text="${missao.dificuldade}"></td>
+
+        <td>
+          <a th:href="@{/missoes/ui/listar/{id}(id=${missao.id})}">ver detalhes</a>
+          <a th:href="@{/missoes/ui/atualizar/{id}(id=${missao.id})}">alterar</a>
+          <a th:href="@{/missoes/ui/deletar/{id}(id=${missao.id})}">deletar</a>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+
+</body>
+</html>
